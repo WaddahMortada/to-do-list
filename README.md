@@ -1,2 +1,4 @@
 # to-do-list
-Simple ReactJS ToDo List
+A simple ReactJS ToDo list
+
+![](readme.gif)
