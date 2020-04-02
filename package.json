@@ -5,6 +5,14 @@
   "author": "Waddah.Mortada",
   "main": "index.js",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WaddahMortada/to-do-list.git"
+  },
+  "bugs": {
+    "url": "https://github.com/WaddahMortada/to-do-list/issues"
+  },
+  "homepage": "https://github.com/WaddahMortada/to-do-list#readme",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
