@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 // eslint-disable-next-line no-unused-vars
 import styles from '../style/style.css'
@@ -45,58 +45,46 @@ const ChildComponent = () => {
   )
 }
 
-class ToDoList extends Component {
-  constructor (props) {
-    super()
-    this.state = { date: props.date, numChildren: 1, progress: 30 }
-    this.handleClick = this.handleClick.bind(this)
-  }
+function ToDoList (props) {
+  const children = []
+  const [date] = useState(props.date)
+  const [numChildren, setNumChildren] = useState(1)
+  const [progress, setProgress] = useState(30)
 
-  static get propTypes () {
-    return {
-      date: PropTypes.any
-    }
-  }
-
-  componentDidMount () {
-    const el = document.getElementById('addToDo')
-    el.addEventListener('click', this.handleClick, false)
-  }
-
-  handleClick (event) {
+  const handleClick = (event) => {
     console.log('yep')
-    this.setState({ numChildren: this.state.numChildren + 1 })
+    setNumChildren(numChildren + 1)
   }
 
-  render () {
-    const children = []
-
-    for (let i = 0; i < this.state.numChildren; i++) {
-      children.push(<ChildComponent key={i}/>)
-    }
-
-    const progressBar = <ProgressBar className="progressBar" now={this.state.progress}/>
-
-    return (
-      <Container>
-        <Row className="title">
-          <Col></Col>
-          <Col><h1>ToDo List</h1></Col>
-          <Col></Col>
-        </Row>
-        <Row>
-          <Col><h6 className="date"><b>Date:</b> {this.state.date}</h6></Col>
-          <Col></Col>
-          <Col><Button variant="success" className="addToDo" id="addToDo">Add</Button></Col>
-        </Row>
-        <br/>
-        <ParentComponent>
-          {progressBar}
-          {children}
-        </ParentComponent>
-      </Container>
-    )
+  for (let i = 0; i < numChildren; i++) {
+    children.push(<ChildComponent key={i} />)
   }
+
+  const progressBar = <ProgressBar className="progressBar" now={progress} />
+
+  return (
+    <Container>
+      <Row className="title">
+        <Col></Col>
+        <Col><h1>ToDo List</h1></Col>
+        <Col></Col>
+      </Row>
+      <Row>
+        <Col><h6 className="date"><b>Date:</b> {date}</h6></Col>
+        <Col></Col>
+        <Col><Button variant="success" className="addToDo" id="addToDo" onClick={handleClick}>Add</Button></Col>
+      </Row>
+      <br />
+      <ParentComponent>
+        {progressBar}
+        {children}
+      </ParentComponent>
+    </Container>
+  )
+}
+
+ToDoList.propTypes = {
+  date: PropTypes.any
 }
 
 export default ToDoList
