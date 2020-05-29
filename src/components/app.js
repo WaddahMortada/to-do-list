@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import ListBox from './listBox'
-import ContentBox from './contentBox'
+import ListContainer from './listContainer'
+import TaskContainer from './taskContainer'
 // import Tasks from './tasks'
 import 'bootstrap/dist/css/bootstrap.min.css'
 // eslint-disable-next-line no-unused-vars
 import styles from '../style/style.css'
 import { Container, Row, Col, Button, FormControl } from 'react-bootstrap'
-import Tasks from './tasks'
+// import Tasks from './tasks'
 
 // let tasks = []
 
@@ -50,10 +50,10 @@ const App = () => {
         </Row>
       </form>
       <Row>
-        <ListBox callbackParent={onSelectedTitleChanged} taskList={taskList} currentTask={currentTask} />
-        <ContentBox callbackParent={onUpdateTodo} task={currentTask} />
       </Row>
     </Container>
+        <ListContainer callbackParent={onSelectedTitleChanged} taskList={taskList} currentTask={currentTask} />
+        <TaskContainer callbackParent={onUpdateTodo} task={currentTask} />
   )
 }
 

@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import Task from './task'
+// import Task from './task'
 import PropTypes from 'prop-types'
 // eslint-disable-next-line no-unused-vars
 import styles from '../style/style.css'
-import {
-  Container,
-  Row,
-  Col,
-  Button,
-  Card,
-  InputGroup,
-  FormControl,
-  ProgressBar,
-  ListGroup
-} from 'react-bootstrap'
+// import {
+//   Container,
+//   Row,
+//   Col,
+//   Button,
+//   Card,
+//   InputGroup,
+//   FormControl,
+//   ProgressBar,
+//   ListGroup
+// } from 'react-bootstrap'
 
-function TasksList (props) {
+function TaskList (props) {
   const taskList = []
   const currentTask = props.currentTask
   // const callbackParent = props.callbackParent
@@ -33,27 +33,24 @@ function TasksList (props) {
     console.log(task)
     const className = (key === props.currentTask) ? 'taskTitle selectedTask' : 'taskTitle'
     taskList.push(
-      <ListGroup.Item key={key} className={className} onClick={handleClick} > {task.title}</ListGroup.Item>
+      // <ListGroup.Item key={key} className={className} onClick={handleClick} > {task.title}</ListGroup.Item>
+      <li key={key} className={className} onClick={handleClick}>{task.title}</li>
     )
   })
 
-  // <li key={task.id} className={className} onClick={handleClick}>{task.title}</li>
-  // < ListGroup.Item key = { key } className = { className } onClick = { handleClick } > { task.title }</ListGroup.Item >
-  // <ListGroup>
-  //   {taskList}
-  // </ListGroup>
-
   return (
-    <ListGroup>
-      {taskList}
-    </ListGroup>
+    <div>
+      <ul>
+        {taskList}
+      </ul>
+    </div>
   )
 }
 
-TasksList.propTypes = {
+TaskList.propTypes = {
   taskList: PropTypes.any,
   currentTask: PropTypes.any,
   callbackParent: PropTypes.any
 }
 
-export default TasksList
+export default TaskList
