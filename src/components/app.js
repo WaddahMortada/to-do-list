@@ -28,7 +28,7 @@ const App = () => {
 
   const onSelectedTitleChanged = (i) => {
     console.log(i)
-    // setCurrentTask(taskList[i])
+    setCurrentTask(taskList[i])
   }
 
   const onUpdateTodo = (todo) => {

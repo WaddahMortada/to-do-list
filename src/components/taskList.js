@@ -17,24 +17,30 @@ import styles from '../style/style.css'
 
 function TaskList (props) {
   const taskList = []
-  const currentTask = props.currentTask
+  const [currentTask, setCurrentTask] = useState(props.currentTask)
   // const callbackParent = props.callbackParent
 
   // console.log(taskList)
   console.log(currentTask)
   // console.log(callbackParent)
 
-  const handleClick = (event) => {
-    console.log(event.currentTarget)
+  const handleClick = (key) => {
+    console.log(key)
+    setCurrentTask(key)
   }
+
+  useEffect(() => {
+    console.log(currentTask)
+    props.callbackParent(currentTask)
+  })
 
   props.taskList.forEach((task, key) => {
     console.log(key)
     console.log(task)
-    const className = (key === props.currentTask) ? 'taskTitle selectedTask' : 'taskTitle'
+    const className = (key === currentTask) ? 'taskTitle selectedTask' : 'taskTitle'
     taskList.push(
       // <ListGroup.Item key={key} className={className} onClick={handleClick} > {task.title}</ListGroup.Item>
-      <li key={key} className={className} onClick={handleClick}>{task.title}</li>
+      <li key={key} className={className} onClick={() => handleClick(key)}>{task.title}</li>
     )
   })
 
