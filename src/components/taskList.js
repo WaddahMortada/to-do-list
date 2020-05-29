@@ -32,7 +32,7 @@ function TaskList (props) {
   useEffect(() => {
     console.log(currentTask)
     props.callbackParent(currentTask)
-  })
+  }, [currentTask])
 
   props.taskList.forEach((task, key) => {
     console.log(key)
