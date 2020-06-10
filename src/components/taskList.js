@@ -46,7 +46,7 @@ function TaskList (props) {
   return (
     <div>
       <ul>
-        {taskList}
+        {taskList.length > 0 ? taskList : <li key="0">No tasks</li>}
       </ul>
     </div>
   )
