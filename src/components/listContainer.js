@@ -6,7 +6,7 @@ import styles from '../style/style.css'
 import PropTypes from 'prop-types'
 
 function ListContainer (props) {
-  console.log(props)
+  console.log('ListContainer: props ', props)
   return (
     // <Col>
     //   <Card>
@@ -15,7 +15,7 @@ function ListContainer (props) {
     //     </Card.Body>
     //   </Card>
     // </Col>
-    <div>
+    <div className="listContainer">
       <List callbackParent={props.callbackParent} taskList={props.taskList} currentTask={props.currentTask} />
     </div>
   )

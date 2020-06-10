@@ -15,6 +15,9 @@ const App = () => {
   const [taskList, setTask] = useState([])
   const [currentTask, setCurrentTask] = useState(0)
 
+  console.log('App: currentTask ', currentTask)
+  console.log('App: taskList ', taskList)
+  console.log('App: task ', taskList[currentTask])
   const addTask = (event) => {
     event.preventDefault()
     setTask([...taskList, { id: taskList.length, title: taskTitle, todo: [] }])
@@ -22,17 +25,17 @@ const App = () => {
   }
 
   useEffect(() => {
-    console.log(taskList)
-    console.log(JSON.stringify(taskList))
+    console.log('App: taskList ', taskList)
+    console.log('App: Stringify taskList ', JSON.stringify(taskList))
   }, [taskList])
 
   const onSelectedTitleChanged = (i) => {
-    console.log(i)
-    setCurrentTask(taskList[i])
+    console.log('App: onSelectedTitleChanged ', i)
+    setCurrentTask(i)
   }
 
   const onUpdateTodo = (todo) => {
-    console.log(todo)
+    console.log('App: onUpdateTodo ', todo)
     // setCurrentTask(taskList[i])
   }
 
@@ -49,7 +52,7 @@ const App = () => {
       </form>
       <div>
         <ListContainer callbackParent={onSelectedTitleChanged} taskList={taskList} currentTask={currentTask} />
-        <TaskContainer callbackParent={onUpdateTodo} task={currentTask} />
+        <TaskContainer callbackParent={onUpdateTodo} task={(taskList[currentTask]) ? taskList[currentTask] : { todo: [] }} />
       </div>
     </div>
   )

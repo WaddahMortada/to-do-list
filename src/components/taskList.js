@@ -21,25 +21,24 @@ function TaskList (props) {
   // const callbackParent = props.callbackParent
 
   // console.log(taskList)
-  console.log(currentTask)
+  console.log('TaskList: currentTask ', currentTask)
   // console.log(callbackParent)
 
   const handleClick = (key) => {
-    console.log(key)
+    console.log('TaskList: handleClick ', key)
     setCurrentTask(key)
   }
 
   useEffect(() => {
-    console.log(currentTask)
+    console.log('TaskList: useEffect currentTask ', currentTask)
     props.callbackParent(currentTask)
   }, [currentTask])
 
   props.taskList.forEach((task, key) => {
-    console.log(key)
-    console.log(task)
+    console.log('TaskList: forEach key ', key)
+    console.log('TaskList: forEach task ', task)
     const className = (key === currentTask) ? 'taskTitle selectedTask' : 'taskTitle'
     taskList.push(
-      // <ListGroup.Item key={key} className={className} onClick={handleClick} > {task.title}</ListGroup.Item>
       <li key={key} className={className} onClick={() => handleClick(key)}>{task.title}</li>
     )
   })
