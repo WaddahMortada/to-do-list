@@ -8,7 +8,7 @@ function TaskContent (props) {
   const todoComponent = []
   const [inputFocus, setInputFocus] = useState(false)
   const [index, setIndex] = useState(0)
-  const [todo, setTodo] = useState(props.task.todo)
+  const [todo, setTodo] = useState((props.task) ? props.task.todo : [])
   const [inputText, setInputText] = useState('')
 
   console.log(inputText)
@@ -16,7 +16,7 @@ function TaskContent (props) {
   console.log('TaskContent: todo ', todo)
 
   todo.forEach((task, key) => {
-    const showInput = inputFocus && (index === key)
+    const showInput = (inputFocus && (index === key)) || !task
     todoComponent.push(
       <li key={key}>
         <input type="checkbox" />
@@ -28,32 +28,22 @@ function TaskContent (props) {
       </li>
     )
   })
-  if (todoComponent.length === 0) {
-    todoComponent.push(
-      <li key="0">
-        <input type="checkbox" />
-        {
-          inputFocus && (index === 0)
-            ? <input type="text" autoFocus onChange={e => setInputText(e.target.value)} onBlur={() => handleBlur(0)} value={inputText} />
-            : < p onClick={() => handleClick(0)}>Click to add ToDo</p>
-        }
-      </li>
-    )
-  }
 
   const handleBlur = (key) => {
     console.log('blured')
     console.log(key)
     console.log(inputText)
 
-    setInputFocus(false)
-
     if (inputText) {
-      todo[index] = inputText
-      setTodo(todo)
+      todo[key] = inputText
     } else {
-      // delete item
+      delete todo[key]
     }
+
+    setInputText('')
+    setInputFocus(false)
+    setTodo(todo)
+    props.callbackParent(todo)
   }
 
   const handleClick = (key) => {
@@ -61,13 +51,27 @@ function TaskContent (props) {
     console.log(key)
     setIndex(key)
     setInputFocus(true)
+    setInputText(todo[key])
+  }
+
+  const addNewItem = () => {
+    setTodo([...todo, ''])
+  }
+
+  let component
+
+  if (props.task && props.task.todo) {
+    component = <div>
+      <ul style={{ float: 'left' }}>
+        {todoComponent}
+      </ul>
+      <button style={{ float: 'right' }} onClick={addNewItem}>+</button>
+    </div>
   }
 
   return (
     <div>
-      <ul>
-        {todoComponent}
-      </ul>
+      {component}
     </div>
   )
 }
