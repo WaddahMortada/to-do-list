@@ -20,8 +20,10 @@ const App = () => {
   console.log('App: task ', taskList[currentTask])
   const addTask = (event) => {
     event.preventDefault()
-    setTask([...taskList, { id: taskList.length, title: taskTitle, todo: [] }])
-    setCurrentTask(taskList.length)
+    if (taskTitle) {
+      setTask([...taskList, { id: taskList.length, title: taskTitle, todo: [] }])
+      setCurrentTask(taskList.length)
+    }
   }
 
   useEffect(() => {
@@ -36,6 +38,8 @@ const App = () => {
 
   const onUpdateTodo = (todo) => {
     console.log('App: onUpdateTodo ', todo)
+    taskList[currentTask].todo = todo
+    setTask(taskList)
     // setCurrentTask(taskList[i])
   }
 
@@ -52,7 +56,7 @@ const App = () => {
       </form>
       <div>
         <ListContainer callbackParent={onSelectedTitleChanged} taskList={taskList} currentTask={currentTask} />
-        <TaskContainer callbackParent={onUpdateTodo} task={(taskList[currentTask]) ? taskList[currentTask] : { todo: [] }} />
+        <TaskContainer callbackParent={onUpdateTodo} task={taskList[currentTask]} />
       </div>
     </div>
   )
