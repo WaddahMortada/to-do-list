@@ -1,61 +1,47 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 // eslint-disable-next-line no-unused-vars
 import styles from '../style/style.css'
 
 function TaskContent (props) {
-  console.log('TaskContent: props ', props)
   const todoComponent = []
-  const [inputFocus, setInputFocus] = useState(false)
   const [index, setIndex] = useState(0)
-  const [todo, setTodo] = useState((props.task) ? props.task.todo : [])
+  const todo = (props.task) ? props.task.todo : []
   const [inputText, setInputText] = useState('')
 
-  console.log(inputText)
-
-  console.log('TaskContent: todo ', todo)
-
   todo.forEach((task, key) => {
-    const showInput = (inputFocus && (index === key)) || !task
+    const showInput = (index === key) || !task
     todoComponent.push(
       <li key={key}>
         <input type="checkbox" />
         {
           showInput
             ? <input type="text" autoFocus onChange={e => setInputText(e.target.value)} onBlur={() => handleBlur(key)} value={inputText} />
-            : < p onClick={() => handleClick(key)}>{task}</p>
+            : <p style={{ display: 'inline-block', paddingLeft: '5px' }} onClick={() => handleClick(key)}>{task}</p>
         }
       </li>
     )
   })
 
   const handleBlur = (key) => {
-    console.log('blured')
-    console.log(key)
-    console.log(inputText)
-
     if (inputText) {
       todo[key] = inputText
     } else {
       delete todo[key]
     }
 
+    setIndex(null)
     setInputText('')
-    setInputFocus(false)
-    setTodo(todo)
     props.callbackParent(todo)
   }
 
-  const handleClick = (key) => {
-    console.log('clicked')
-    console.log(key)
-    setIndex(key)
-    setInputFocus(true)
-    setInputText(todo[key])
+  const handleClick = (index) => {
+    setIndex(index)
+    setInputText(todo[index])
   }
 
   const addNewItem = () => {
-    setTodo([...todo, ''])
+    props.callbackParent([...todo, ''])
   }
 
   if (props.task && props.task.todo) {

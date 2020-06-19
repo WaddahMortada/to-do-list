@@ -1,23 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import ListContainer from './listContainer'
 import TaskContainer from './taskContainer'
-// import Tasks from './tasks'
-// import 'bootstrap/dist/css/bootstrap.min.css'
 // eslint-disable-next-line no-unused-vars
 import styles from '../style/style.css'
-// import { Container, Row, Col, Button, FormControl } from 'react-bootstrap'
-// import Tasks from './tasks'
-
-// let tasks = []
 
 const App = () => {
   const [taskTitle, setTaskTitle] = useState('')
   const [taskList, setTask] = useState([])
   const [currentTask, setCurrentTask] = useState(0)
 
-  console.log('App: currentTask ', currentTask)
-  console.log('App: taskList ', taskList)
-  console.log('App: task ', taskList[currentTask])
+  // console.log('App: currentTask ', currentTask)
+  // console.log('App: taskList ', taskList)
+  // console.log('App: task ', taskList[currentTask])
   const addTask = (event) => {
     event.preventDefault()
     if (taskTitle) {
@@ -26,10 +20,10 @@ const App = () => {
     }
   }
 
-  useEffect(() => {
-    console.log('App: taskList ', taskList)
-    console.log('App: Stringify taskList ', JSON.stringify(taskList))
-  }, [taskList])
+  // useEffect(() => {
+  //   console.log('App: taskList ', taskList)
+  //   console.log('App: Stringify taskList ', JSON.stringify(taskList))
+  // }, [taskList])
 
   const onSelectedTitleChanged = (i) => {
     console.log('App: onSelectedTitleChanged ', i)
@@ -39,8 +33,7 @@ const App = () => {
   const onUpdateTodo = (todo) => {
     console.log('App: onUpdateTodo ', todo)
     taskList[currentTask].todo = todo
-    setTask(taskList)
-    // setCurrentTask(taskList[i])
+    setTask([...taskList])
   }
 
   return (
