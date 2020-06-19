@@ -58,22 +58,18 @@ function TaskContent (props) {
     setTodo([...todo, ''])
   }
 
-  let component
-
   if (props.task && props.task.todo) {
-    component = <div>
-      <ul style={{ float: 'left' }}>
-        {todoComponent}
-      </ul>
-      <button style={{ float: 'right' }} onClick={addNewItem}>+</button>
-    </div>
+    return (
+      <div>
+        <ul style={{ float: 'left' }}>
+          {todoComponent}
+        </ul>
+        <button style={{ float: 'right' }} onClick={addNewItem}>+</button>
+      </div>
+    )
   }
 
-  return (
-    <div>
-      {component}
-    </div>
-  )
+  return (<div></div>)
 }
 
 TaskContent.propTypes = {
