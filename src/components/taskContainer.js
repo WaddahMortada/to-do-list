@@ -4,7 +4,7 @@ import TaskContent from './taskContent'
 import styles from '../style/style.css'
 import PropTypes from 'prop-types'
 
-function TaskContainer (props) {
+const TaskContainer = props => {
   console.log('TaskConatiner: props ', props)
 
   return (

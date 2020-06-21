@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 // eslint-disable-next-line no-unused-vars
 import styles from '../style/style.css'
 
-function TaskContent (props) {
+const TaskContent = props => {
   const todoComponent = []
   const [index, setIndex] = useState(0)
   const todo = (props.task) ? props.task.todo : []

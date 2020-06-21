@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 // eslint-disable-next-line no-unused-vars
 import styles from '../style/style.css'
 
-function TaskList (props) {
+const TaskList = props => {
   const taskList = []
 
   const handleClick = (key) => {

@@ -4,7 +4,7 @@ import List from './taskList'
 import styles from '../style/style.css'
 import PropTypes from 'prop-types'
 
-function ListContainer (props) {
+const ListContainer = props => {
   console.log('ListContainer: props ', props)
   return (
     <div className="listContainer">
