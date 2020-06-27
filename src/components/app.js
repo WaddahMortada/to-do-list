@@ -3,11 +3,13 @@ import ListContainer from './listContainer'
 import TaskContainer from './taskContainer'
 // eslint-disable-next-line no-unused-vars
 import styles from '../style/style.css'
+import EditModule from './editModule'
 
 const App = () => {
   const [taskTitle, setTaskTitle] = useState('')
   const [taskList, setTask] = useState([])
   const [currentTask, setCurrentTask] = useState(0)
+  const [edit, setEdit] = useState(false)
 
   // console.log('App: currentTask ', currentTask)
   // console.log('App: taskList ', taskList)
@@ -36,9 +38,28 @@ const App = () => {
     setTask([...taskList])
   }
 
+  const editCurrentTask = () => {
+    console.log('edit current task', currentTask)
+    setEdit(true)
+  }
+
+  const deleteTask = () => {
+    console.log('delete curremt task', currentTask)
+  }
+
+  const updateTitle = (newTitle) => {
+    console.log('updateTitle', newTitle)
+  }
+
+  const closeModule = () => {
+    console.log('closeModule')
+    setEdit(false)
+  }
+
   return (
     // <ToDoList date={new Date().toISOString().slice(0, 10)} />
     <div className="appContainer">
+      {(edit) ? <EditModule task={taskList[currentTask]} updateTitle={updateTitle} deleteTask={deleteTask} closeModule={closeModule} onBlur={closeModule} /> : null}
       <form onSubmit={addTask}>
         <div>
           <div>
@@ -47,6 +68,7 @@ const App = () => {
           </div>
         </div>
       </form>
+      {(taskList.length) ? <button onClick={editCurrentTask}>Edit Current Task</button> : null}
       <div>
         <ListContainer callbackParent={onSelectedTitleChanged} taskList={taskList} currentTask={currentTask} />
         <TaskContainer callbackParent={onUpdateTodo} task={taskList[currentTask]} />
