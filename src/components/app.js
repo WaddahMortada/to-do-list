@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ListContainer from './listContainer'
 import TaskContainer from './taskContainer'
 // eslint-disable-next-line no-unused-vars
@@ -7,7 +7,7 @@ import EditModule from './editModule'
 
 const App = () => {
   const [taskTitle, setTaskTitle] = useState('')
-  const [taskList, setTask] = useState([])
+  const [taskList, setTaskList] = useState([])
   const [currentTask, setCurrentTask] = useState(0)
   const [edit, setEdit] = useState(false)
 
@@ -17,8 +17,9 @@ const App = () => {
   const addTask = (event) => {
     event.preventDefault()
     if (taskTitle) {
-      setTask([...taskList, { id: taskList.length, title: taskTitle, todo: [] }])
+      setTaskList([...taskList, { title: taskTitle, todo: [] }])
       setCurrentTask(taskList.length)
+      setTaskTitle('')
     }
   }
 
@@ -35,24 +36,27 @@ const App = () => {
   const onUpdateTodo = (todo) => {
     console.log('App: onUpdateTodo ', todo)
     taskList[currentTask].todo = todo
-    setTask([...taskList])
+    setTaskList([...taskList])
   }
 
   const editCurrentTask = () => {
-    console.log('edit current task', currentTask)
     setEdit(true)
   }
 
   const deleteTask = () => {
-    console.log('delete curremt task', currentTask)
+    taskList.splice(currentTask, 1)
+    const t = [...taskList]
+    setTaskList(t)
+    setCurrentTask((t.length > 1) ? t.length - 1 : 0)
+    setEdit(false)
   }
 
   const updateTitle = (newTitle) => {
-    console.log('updateTitle', newTitle)
+    taskList[currentTask].title = newTitle
+    setTaskList([...taskList])
   }
 
   const closeModule = () => {
-    console.log('closeModule')
     setEdit(false)
   }
 
