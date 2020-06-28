@@ -1,8 +1,7 @@
 import React from 'react'
 import List from './taskList'
-// eslint-disable-next-line no-unused-vars
-import styles from '../style/style.css'
 import PropTypes from 'prop-types'
+import styles from '../style/style.css' // eslint-disable-line no-unused-vars
 
 const ListContainer = props => {
   console.log('ListContainer: props ', props)

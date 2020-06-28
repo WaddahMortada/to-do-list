@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import ListContainer from './listContainer'
 import TaskContainer from './taskContainer'
-// eslint-disable-next-line no-unused-vars
-import styles from '../style/style.css'
 import EditModule from './editModule'
+import styles from '../style/style.css' // eslint-disable-line no-unused-vars
 
 const App = () => {
   const [taskTitle, setTaskTitle] = useState('')
