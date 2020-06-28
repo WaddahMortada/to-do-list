@@ -59,19 +59,24 @@ const App = () => {
   return (
     // <ToDoList date={new Date().toISOString().slice(0, 10)} />
     <div className="appContainer">
-      {(edit) ? <EditModule task={taskList[currentTask]} updateTitle={updateTitle} deleteTask={deleteTask} closeModule={closeModule} onBlur={closeModule} /> : null}
-      <form onSubmit={addTask}>
-        <div>
+      {(edit)
+        ? <div className="editModule"><EditModule task={taskList[currentTask]} updateTitle={updateTitle} deleteTask={deleteTask} closeModule={closeModule} onBlur={closeModule} /></div>
+        : null
+      }
+      <div className={(edit) ? 'dim' : null} onClick={(edit) ? () => setEdit(false) : null}>
+        <form onSubmit={addTask}>
           <div>
-            <input type="text" label="title" name="taskTitle" value={taskTitle} onChange={e => setTaskTitle(e.target.value)} />
-            <input type="submit" value="Add Task" />
+            <div>
+              <input type="text" label="title" name="taskTitle" value={taskTitle} onChange={e => setTaskTitle(e.target.value)} />
+              <input type="submit" value="Add Task" />
+            </div>
           </div>
+        </form>
+        {(taskList.length) ? <button onClick={editCurrentTask}>Edit Current Task</button> : null}
+        <div>
+          <ListContainer callbackParent={onSelectedTitleChanged} taskList={taskList} currentTask={currentTask} />
+          <TaskContainer callbackParent={onUpdateTodo} task={taskList[currentTask]} />
         </div>
-      </form>
-      {(taskList.length) ? <button onClick={editCurrentTask}>Edit Current Task</button> : null}
-      <div>
-        <ListContainer callbackParent={onSelectedTitleChanged} taskList={taskList} currentTask={currentTask} />
-        <TaskContainer callbackParent={onUpdateTodo} task={taskList[currentTask]} />
       </div>
     </div>
   )

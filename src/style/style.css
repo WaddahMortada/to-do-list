@@ -6,7 +6,7 @@
 
 body {
   font-family:'Arial';
-  background-color: rgb(35, 62, 35) !important;
+  background-color: #2f522f !important;
 }
 
 .title {
@@ -70,14 +70,14 @@ body {
   width: 25% !important;
   height: 85vh;
   float: left;
-  background-color: rgb(15, 47, 107);
+  background-color: #244179;
 }
 
 .taskContainer {
   width: 75% !important;
   height: 85vh;
   float: right;
-  background-color: rgb(122, 32, 16);
+  background-color: #7a382d;
 }
 
 .selectedTask {
@@ -87,4 +87,20 @@ body {
 
 ul {
   list-style: none
+}
+
+.editModule {
+  z-index: 999;
+}
+
+.dim {
+  background:#000;
+  opacity:0.5;
+  /* position:fixed; */
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:99;
+  pointer-events: none;
 }
