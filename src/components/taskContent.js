@@ -4,6 +4,7 @@ import styles from '../style/style.css' // eslint-disable-line no-unused-vars
 
 const TaskContent = props => {
   const todoComponent = []
+  // TODO: Remove index state hack!!!
   const [index, setIndex] = useState(0)
   const todo = (props.task) ? props.task.todo : []
   const [inputText, setInputText] = useState('')
