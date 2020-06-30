@@ -33,7 +33,7 @@ const TaskContent = props => {
     if (inputText) {
       todo[key].text = inputText
     } else {
-      delete todo[key]
+      todo.splice(key, 1)
     }
 
     setIndex(null)
