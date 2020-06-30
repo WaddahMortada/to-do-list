@@ -9,22 +9,29 @@ const TaskContent = props => {
   const [inputText, setInputText] = useState('')
 
   todo.forEach((task, key) => {
-    const showInput = (index === key) || !task
+    const showInput = (index === key) || !task.text
     todoComponent.push(
       <li key={key}>
-        <input type="checkbox" />
+        <input type="checkbox" onChange={() => handleOnChangeCheck(key)} checked={task.checked} />
         {
           showInput
             ? <input type="text" autoFocus onChange={e => setInputText(e.target.value)} onBlur={() => handleBlur(key)} value={inputText} />
-            : <p style={{ display: 'inline-block', paddingLeft: '5px' }} onClick={() => handleClick(key)}>{task}</p>
+            : <p style={{ display: 'inline-block', paddingLeft: '5px' }} onClick={() => handleClick(key)}>{task.text}</p>
         }
       </li>
     )
   })
 
+  const handleOnChangeCheck = (key) => {
+    console.log('handleCheck')
+    console.log(key)
+    todo[key].checked = !todo[key].checked
+    props.callbackParent(todo)
+  }
+
   const handleBlur = (key) => {
     if (inputText) {
-      todo[key] = inputText
+      todo[key].text = inputText
     } else {
       delete todo[key]
     }
@@ -36,11 +43,11 @@ const TaskContent = props => {
 
   const handleClick = (index) => {
     setIndex(index)
-    setInputText(todo[index])
+    setInputText(todo[index].text)
   }
 
   const addNewItem = () => {
-    props.callbackParent([...todo, ''])
+    props.callbackParent([...todo, { text: '', checked: false }])
   }
 
   if (props.task && props.task.todo) {
