@@ -12,7 +12,9 @@ const TaskList = props => {
   props.taskList.forEach((task, key) => {
     const className = (key === props.currentTask) ? 'taskTitle selectedTask' : 'taskTitle'
     taskList.push(
-      <li key={key} className={className} onClick={() => handleClick(key)}>{task.title}</li>
+      <li key={key} className={className} onClick={() => handleClick(key)}>
+        <p>{task.title} <small>{task.progress}%</small></p>
+      </li>
     )
   })
 
