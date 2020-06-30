@@ -16,7 +16,7 @@ const App = () => {
   const addTask = (event) => {
     event.preventDefault()
     if (taskTitle) {
-      setTaskList([...taskList, { title: taskTitle, todo: [] }])
+      setTaskList([...taskList, { title: taskTitle, todo: [], progress: 0 }])
       setCurrentTask(taskList.length)
       setTaskTitle('')
     }
@@ -32,9 +32,18 @@ const App = () => {
     setCurrentTask(i)
   }
 
+  const calculateProgress = todo => {
+    let checked = 0
+    todo.forEach((task) => {
+      if (task.checked) checked++
+    })
+    return checked / todo.length * 100
+  }
+
   const onUpdateTodo = (todo) => {
     console.log('App: onUpdateTodo ', todo)
     taskList[currentTask].todo = todo
+    taskList[currentTask].progress = calculateProgress(todo)
     setTaskList([...taskList])
   }
 

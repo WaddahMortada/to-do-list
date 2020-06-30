@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import ProgressBar from './ProgressBar'
 import styles from '../style/style.css' // eslint-disable-line no-unused-vars
 
 const TaskContent = props => {
@@ -54,6 +55,7 @@ const TaskContent = props => {
   if (props.task && props.task.todo) {
     return (
       <div>
+        <ProgressBar progress={(props.task) ? props.task.progress : 0} />
         <ul style={{ float: 'left' }}>
           {todoComponent}
         </ul>

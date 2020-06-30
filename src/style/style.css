@@ -104,3 +104,13 @@ ul {
   z-index:99;
   pointer-events: none;
 }
+
+#progressBar {
+  width: 100%;
+  background-color: grey;
+}
+
+#bar {
+  height: 10px;
+  background-color: green;
+}
