@@ -37,7 +37,8 @@ const App = () => {
     todo.forEach((task) => {
       if (task.checked) checked++
     })
-    return checked / todo.length * 100
+    const progress = checked / todo.length * 100
+    return (Math.round(progress * 100) / 100).toFixed(0)
   }
 
   const onUpdateTodo = (todo) => {
